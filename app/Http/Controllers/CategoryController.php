@@ -16,9 +16,9 @@ class CategoryController extends Controller
        foreach ($categories as $item) {
             if(is_null($item->id_parent_category)) {
                     $object = new \stdClass();
-                    $object->data['title'] = $item->title; // nombre del objeto
-                    $object->data['size'] = $item->title; // nombre del objeto
-                    $object->data['type'] = $item->title; // nombre del objeto
+                    $object->data['name'] = $item->title; // nombre del objeto
+                    $object->data['id'] = $item->id; // nombre del objeto
+
                     $object->children = []; // array vacío para los hijos
 
                     // Comprobar si el objeto tiene hijos
@@ -28,15 +28,16 @@ class CategoryController extends Controller
                             $hijos = $this->children($child, $child->id);
                             if($hijos) $object->children[] = $hijos;
                         }
-                    $treeData[] = $object;
+
                 }
+                $treeData[] = $object;
             }
 
     }
 
-
         return response()->json([
             'data' => $treeData,
+            'list' => $categories,
             'message' => 'Categorías obtenidas correctamente.',
         ]);
     }
@@ -45,9 +46,9 @@ class CategoryController extends Controller
 
         $childObject = new \stdClass();
 
-            $childObject->data['title'] = $child1->title; // nombre del objeto
-            $childObject->data['size'] = $child1->title; // nombre del objeto
-            $childObject->data['type'] = $child1->title; // nombre del objeto
+            $childObject->data['name'] = $child1->title; // nombre del objeto
+            $childObject->data['id'] = $child1->id; // nombre del objeto
+
             $childObject->children = []; // array vacío para los hijos
 
             $childTest = Category::where('id_parent_category', $id)->get();
