@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Requests\ValidationCategory;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -68,14 +71,18 @@ class CategoryController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ValidationCategory $request)
     {
-        $category = Category::create($request->all());
 
-        return response()->json([
-            'data' => $category,
-            'message' => 'Categoría creada correctamente.',
-        ], Response::HTTP_CREATED);
+            $peticion = $request->all();
+
+            $category = Category::create($peticion);
+
+            return response()->json([
+                'data' => $category,
+                'message' => 'Category saved successfully.'
+            ], Response::HTTP_CREATED);
+
     }
 
     /**
