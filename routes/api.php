@@ -12,10 +12,12 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix', 'auth'], function($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-});
-
+Route::group(['prefix' => 'auth'], function($router) {
+        Route::post('/login',    [AuthController::class, 'login']);
+        Route::post('/logout',   [AuthController::class, 'logout']);
+        Route::post('/refresh',  [AuthController::class, 'refresh']);
+        Route::post('/profile',  [AuthController::class, 'profile']);
+    });
 Route::apiResource('categories',   'App\Http\Controllers\CategoryController');
 
 

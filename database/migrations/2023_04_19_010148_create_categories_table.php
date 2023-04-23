@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreateCategoriesTable extends Migration
 {
+    use SoftDeletes;
+
     /**
      * Run the migrations.
      *
