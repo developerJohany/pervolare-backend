@@ -51,6 +51,8 @@ class CategoryController extends Controller
         $childObject = new \stdClass();
             $childObject->data['name'] = $child1->title; // nombre del objeto
             $childObject->data['id'] = $child1->id; // nombre del objeto
+            $childObject->data['code'] = $child1->code;
+            $childObject->data['desc'] = $child1->description;
             $childObject->children = []; // array vacío para los hijos
 
             $childTest = Category::where('id_parent_category', $id)->get();
